@@ -1,0 +1,549 @@
+/* =====================================================
+   App.css — Dashboard Invernadero Inteligente
+   Tema: Moderno oscuro, completamente monocromático
+   ===================================================== */
+
+:root {
+  --bg-base:      #080808;
+  --bg-surface:   #101010;
+  --bg-card:      #161616;
+  --bg-elevated:  #1e1e1e;
+  --bg-hover:     #242424;
+
+  --border-subtle:  rgba(255, 255, 255, 0.05);
+  --border-default: rgba(255, 255, 255, 0.09);
+  --border-strong:  rgba(255, 255, 255, 0.18);
+
+  --text-primary:   #f0f0f0;
+  --text-secondary: #888888;
+  --text-muted:     #454545;
+
+  --status-ok:    #e8e8e8;
+  --status-warn:  #707070;
+  --status-crit:  #3a3a3a;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+/* ---- Reset base ---- */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+}
+
+/* ================================================================
+   HEADER
+   ================================================================ */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.header-icon {
+  color: var(--text-primary);
+  opacity: 0.9;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.header-sub {
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.7rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border: 1px solid var(--border-default);
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+}
+
+.status-badge.online  { color: var(--text-primary);   border-color: var(--border-strong); }
+.status-badge.offline { color: var(--text-muted); }
+
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.refresh-btn:hover {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+/* ================================================================
+   MAIN
+   ================================================================ */
+.main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1300px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.timestamp {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+  letter-spacing: 0.03em;
+}
+
+/* ---- Secciones ---- */
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.section-title {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ================================================================
+   SENSOR CARDS
+   ================================================================ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.sensor-card {
+  background: var(--bg-card);
+  padding: 1.5rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  position: relative;
+  transition: background 0.15s;
+}
+
+.sensor-card:hover {
+  background: var(--bg-elevated);
+}
+
+/* Barra de estado superior (3px) */
+.sensor-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+}
+
+.sensor-card.optimo::before   { background: var(--status-ok);   }
+.sensor-card.alerta::before   { background: var(--status-warn);  }
+.sensor-card.critico::before  { background: var(--status-crit);  }
+.sensor-card.sin-datos::before { background: transparent; }
+
+.card-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.card-icon {
+  color: var(--text-muted);
+}
+
+.card-estado-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.card-estado-dot.optimo  { background: var(--status-ok);   box-shadow: 0 0 6px var(--status-ok); }
+.card-estado-dot.alerta  { background: var(--status-warn); }
+.card-estado-dot.critico { background: var(--status-crit); border: 1px solid var(--text-muted); }
+
+.card-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.2rem;
+}
+
+.card-value {
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.card-unit {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+}
+
+.card-sensor-label {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.card-estado-label {
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+.card-estado-label.optimo  { color: var(--status-ok);   }
+.card-estado-label.alerta  { color: var(--status-warn);  }
+.card-estado-label.critico { color: var(--status-crit);  }
+
+/* ================================================================
+   GAUGE CALIDAD DEL AIRE
+   ================================================================ */
+.gauge-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.gauge-bar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.gauge-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.gauge-bar-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: visible;
+}
+
+.gauge-bar-fill {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  border-radius: 999px;
+  background: var(--text-primary);
+  opacity: 0.15;
+  transition: width 0.5s ease;
+}
+
+.gauge-bar-marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--text-primary);
+  box-shadow: 0 0 0 3px var(--bg-card), 0 0 0 5px var(--border-strong);
+  transition: left 0.5s ease;
+}
+
+.gauge-bar-scale {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+.gauge-info-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  min-width: 140px;
+}
+
+.gauge-ppm-value {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.gauge-ppm-unit {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.gauge-quality-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-default);
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+}
+
+.gauge-adc {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+}
+
+/* ================================================================
+   AI PANEL
+   ================================================================ */
+.ai-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  border-left: 2px solid var(--border-strong);
+}
+
+.ai-panel.optimo   { border-left-color: var(--status-ok);   }
+.ai-panel.alerta   { border-left-color: var(--status-warn);  }
+.ai-panel.critico  { border-left-color: var(--status-crit);  }
+.ai-panel.pendiente { border-left-color: var(--border-default); }
+
+.ai-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.ai-panel-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ai-panel-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.ai-panel-indicator.optimo  { background: var(--status-ok);   box-shadow: 0 0 8px var(--status-ok); }
+.ai-panel-indicator.alerta  { background: var(--status-warn); }
+.ai-panel-indicator.critico { background: var(--status-crit); border: 1px solid var(--text-muted); }
+
+.ai-panel-status {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.ai-panel-status.optimo  { color: var(--status-ok);   }
+.ai-panel-status.alerta  { color: var(--status-warn);  }
+.ai-panel-status.critico { color: var(--text-muted);   }
+
+.ai-panel-time {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-panel-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+  max-width: 820px;
+}
+
+.ai-panel-empty {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ================================================================
+   HISTORY CHART
+   ================================================================ */
+.chart-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 1rem 1rem;
+}
+
+.chart-controls {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.chart-toggle-btn {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: all 0.15s;
+  border: 1px solid var(--border-default);
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.chart-toggle-btn.active {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+/* ================================================================
+   LOADING STATE
+   ================================================================ */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  min-height: 60vh;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+/* ================================================================
+   SPINNER
+   ================================================================ */
+.spinning {
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.footer {
+  text-align: center;
+  padding: 1.25rem;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+  letter-spacing: 0.04em;
+}
+
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 768px) {
+  .main          { padding: 1.25rem; }
+  .header        { padding: 0 1.25rem; }
+  .cards-grid    { grid-template-columns: repeat(2, 1fr); }
+  .gauge-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .gauge-info-section { align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .cards-grid { grid-template-columns: 1fr 1fr; }
+}
