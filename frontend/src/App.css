@@ -1,26 +1,30 @@
 /* =====================================================
    App.css — Dashboard Invernadero Inteligente
-   Tema: Moderno oscuro, completamente monocromático
+   Tema: Oscuro con verde pastel y acentos contrastantes
    ===================================================== */
 
 :root {
-  --bg-base:      #080808;
-  --bg-surface:   #101010;
-  --bg-card:      #161616;
-  --bg-elevated:  #1e1e1e;
-  --bg-hover:     #242424;
+  --bg-base:      #0b1710;
+  --bg-surface:   #101e14;
+  --bg-card:      #152019;
+  --bg-elevated:  #1c2e21;
+  --bg-hover:     #223527;
 
-  --border-subtle:  rgba(255, 255, 255, 0.05);
-  --border-default: rgba(255, 255, 255, 0.09);
-  --border-strong:  rgba(255, 255, 255, 0.18);
+  --border-subtle:  rgba(134, 239, 172, 0.08);
+  --border-default: rgba(134, 239, 172, 0.15);
+  --border-strong:  rgba(134, 239, 172, 0.30);
 
-  --text-primary:   #f0f0f0;
-  --text-secondary: #888888;
-  --text-muted:     #454545;
+  --text-primary:   #f0fdf4;
+  --text-secondary: #86efac;
+  --text-muted:     #4b7a5e;
 
-  --status-ok:    #e8e8e8;
-  --status-warn:  #707070;
-  --status-crit:  #3a3a3a;
+  /* Paleta de estado — pastel con buen contraste */
+  --status-ok:    #86efac;   /* verde pastel   */
+  --status-warn:  #fde68a;   /* amarillo pastel */
+  --status-crit:  #fca5a5;   /* rojo pastel     */
+
+  /* Acento secundario */
+  --accent-cyan:  #67e8f9;
 
   --radius-sm: 8px;
   --radius-md: 12px;

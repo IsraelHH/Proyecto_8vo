@@ -46,7 +46,7 @@ export default function AIPanel({ recomendacion, formatFecha }) {
         <p className="ai-panel-text">{recomendacion.recomendacion}</p>
       ) : (
         <p className="ai-panel-empty">
-          Esperando análisis de la IA. Verifica que el puente Python esté activo.
+          Esperando Recomendacion de la IA
         </p>
       )}
     </div>
